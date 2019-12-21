@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-helloworld-service
+spec:
+  selector:
+    app: django-helloworld
+  ports:
+  - protocol: "TCP"
+    port: 8000
+    targetPort: 5000
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-helloworld
+  labels:
+    app: django-helloworld
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: django-helloworld
+  template:
+    metadata:
+      labels:
+        app: django-helloworld
+    spec:
+      containers:
+      - name: django-helloworld
+        image: acrshgpdev1.azurecr.io/jaspreetwaraich/django-helloworld:191
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
