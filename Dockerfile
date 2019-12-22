@@ -15,7 +15,11 @@ RUN mkdir /hello_world
 WORKDIR /hello_world
 
 # Copy the current directory contents into the container at /hello_world
-ADD . /hello_world/
+COPY . /hello_world/
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
+
+CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+#RUN adduser -d user
+#USER user

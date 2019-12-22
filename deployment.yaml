@@ -6,10 +6,10 @@ spec:
   selector:
     app: django-helloworld
   ports:
-  - protocol: "TCP"
-    port: 8000
-    targetPort: 5000
-  type: LoadBalancer
+  - protocol: TCP
+    port: 80
+    targetPort: 30800
+  type: NodePort
 
 ---
 
@@ -17,8 +17,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: django-helloworld
-  labels:
-    app: django-helloworld
 spec:
   replicas: 3
   selector:
@@ -31,7 +29,7 @@ spec:
     spec:
       containers:
       - name: django-helloworld
-        image: acrshgpdev1.azurecr.io/jaspreetwaraich/django-helloworld:191
-        imagePullPolicy: Never
+        image: django-helloworld:1.0
+        #imagePullPolicy: Always
         ports:
-        - containerPort: 5000
+        - containerPort: 8000
