@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: django-helloworld
-        image: acrshgpdev1.azurecr.io/django-helloworld:197
+        image: acrshgpdev1.azurecr.io/django-helloworld:198
         #imagePullPolicy: Always
         ports:
         - containerPort: 8000
